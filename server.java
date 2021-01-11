@@ -10,8 +10,15 @@ public class server
 {
 	public static void main(String args[]) throws Exception
 	{
+		if (args.length < 1)
+		{
+			System.out.println("Usage: java server port");
+			return;
+		}
+		int serverPort = Integer.valueOf(args[0]);
+
 		boolean newClient;
-		DatagramSocket socket = new DatagramSocket(5666);
+		DatagramSocket socket = new DatagramSocket(serverPort);
 		ArrayList<clientinfo> clients = new ArrayList<clientinfo>();
 		System.out.println("Server is started!");
 
