@@ -13,10 +13,18 @@ public class client
 {
 	public static void main(String args[]) throws Exception
 	{
+		if (args.length < 3)
+		{
+			System.out.println("Usage: java client serverIP serverPORT peerPORT");
+			return;
+		}
+		String serverAddr = args[0];
+		int serverPort = Integer.valueOf(args[1]);
+		int peerPort = Integer.valueOf(args[2]);
+
 		BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));
-		DatagramSocket clientSocket = new DatagramSocket(9876);
-		InetAddress IPAddress = InetAddress.getByName("192.168.50.88");
-		int portNumber = 5666;
+		DatagramSocket clientSocket = new DatagramSocket(peerPort);
+		InetAddress IPAddress = InetAddress.getByName(serverAddr);
 		byte[] sendData = new byte[1024];
 		byte[] receiveData = new byte[1024];
 		String sentence = "";
@@ -27,7 +35,7 @@ public class client
 
 		sentence = "<Hi!>";
 		sendData = sentence.getBytes();
-		sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, portNumber);
+		sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, serverPort);
 		clientSocket.send(sendPacket);
 
 		receivePacket = new DatagramPacket(receiveData, receiveData.length);
@@ -41,7 +49,7 @@ public class client
 		{
 			sentence = inFromUser.readLine();
 			sendData = sentence.getBytes();
-			sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, portNumber);
+			sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, serverPort);
 			clientSocket.send(sendPacket);
 
 			receivePacket = new DatagramPacket(receiveData, receiveData.length);
@@ -63,7 +71,7 @@ public class client
 
 		} while(clients.size() < 1);
 
-		clientsender sender = new clientsender(clientSocket, client.address, client.port, portNumber);
+		clientsender sender = new clientsender(clientSocket, client.address, client.port, serverPort);
 
 		Thread threadSend = new Thread(sender);
 		threadSend.start(); 
