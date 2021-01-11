@@ -28,7 +28,7 @@ public class client
 		byte[] sendData = new byte[1024];
 		byte[] receiveData = new byte[1024];
 		String sentence = "";
-		
+
 		System.out.println("Client is started! Port: " + clientSocket.getLocalPort());
 		DatagramPacket sendPacket = null;
 		DatagramPacket receivePacket = null;
