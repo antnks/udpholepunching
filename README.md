@@ -63,6 +63,10 @@ If UDP Hole punching is not possible because of the port randomization by the NA
 # Usage:
 
 ```
+javac server.java
+javac client.java
+javac test.java
+
 java server
 java client
 java test
