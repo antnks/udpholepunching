@@ -59,3 +59,11 @@ First Alice tells the Skype server that she wants to call Bob. Then, Skype serve
 ![Figure 1: UDP Hole Punching](https://i.imgsafe.org/278b5ac6c7.png)
 
 If UDP Hole punching is not possible because of the port randomization by the NAT devices, then the server is used to pass the whole communication between users behind NAT.
+
+# Usage:
+
+```
+java server
+java client
+java test
+```
